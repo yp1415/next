@@ -1,0 +1,39 @@
+
+/* کانتینر ردیفی */
+.container {
+    display: flex;
+    gap: 10px;
+    padding: 10px 10px;
+}
+
+/* استایل مشترک */
+.btn {
+    padding: 8px 16px; /* کوچک‌تر و مستطیلی */
+    background-color: #fff;
+    font-size: 20px;
+    font-family: 'vazir', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    user-select: none;
+}
+
+/* ورود */
+.link_login {
+    border: none;
+    color: #333;
+}
+
+/* ثبت نام */
+.link_register {
+    border: 2px solid #5900ff;
+    color: #5900ff;
+}
+
+/* هاور */
+.btn:hover {
+    background-color: #f3f3f3;
+}

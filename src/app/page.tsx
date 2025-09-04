@@ -1,102 +1,163 @@
-import Image from "next/image";
+"use client";
+import { useState } from 'react';
+import { Navigation } from './components/Navigation';
+import { HomePage } from './components/HomePage';
+import { CoursesPage } from './components/CoursesPage';
+import { AboutPage } from './components/AboutPage';
+import { ContactPage } from './components/ContactPage';
+import { KhayyamLogo } from './components/KhayyamLogo';
+import { Github, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
-export default function Home() {
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomePage onPageChange={setCurrentPage} />;
+      case 'courses':
+        return <CoursesPage />;
+      case 'about':
+        return <AboutPage />;
+      case 'contact':
+        return <ContactPage />;
+      default:
+        return <HomePage onPageChange={setCurrentPage} />;
+    }
+  };
+
+  const socialLinks = [
+    { icon: Github, href: '#', label: 'GitHub' },
+    { icon: Twitter, href: '#', label: 'Twitter' },
+    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Youtube, href: '#', label: 'YouTube' },
+  ];
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-white">
+      <Navigation currentPage={currentPage} onPageChange={setCurrentPage} />
+      {renderPage()}
+      
+      {/* Enhanced Footer */}
+      <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+        {/* Main Footer Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+            {/* Company Info */}
+            <div className="lg:col-span-2">
+              <div className="mb-6">
+                <KhayyamLogo size="md" className="text-white" />
+              </div>
+              <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
+                Khayyam Institute of Technology - Where innovation meets excellence. Transforming careers through 
+                world-class education and cutting-edge technology training since our founding.
+              </p>
+              <div className="flex space-x-4">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className="p-3 bg-white/10 rounded-lg hover:bg-gradient-to-r hover:from-emerald-500 hover:to-teal-600 transition-all duration-300 group"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="h-5 w-5 text-gray-300 group-hover:text-white transition-colors" />
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            {/* Quick Links */}
+            <div>
+              <h3 className="font-bold text-lg mb-6 text-white">Programs</h3>
+              <ul className="space-y-3">
+                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">Full Stack Development</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Python & AI/ML</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Mobile Development</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">DevOps & Cloud</button></li>
+                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">All Programs</button></li>
+              </ul>
+            </div>
+            
+            {/* Company */}
+            <div>
+              <h3 className="font-bold text-lg mb-6 text-white">Company</h3>
+              <ul className="space-y-3">
+                <li><button onClick={() => setCurrentPage('about')} className="text-gray-300 hover:text-emerald-400 transition-colors">About Khayyam</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Faculty</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Careers</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Research</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">News</button></li>
+              </ul>
+            </div>
+            
+            {/* Support & Contact */}
+            <div>
+              <h3 className="font-bold text-lg mb-6 text-white">Support</h3>
+              <ul className="space-y-3 mb-6">
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Help Center</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Alumni Network</button></li>
+                <li><button onClick={() => setCurrentPage('contact')} className="text-gray-300 hover:text-emerald-400 transition-colors">Contact Us</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Student Portal</button></li>
+              </ul>
+              
+              {/* Contact Info */}
+              <div className="space-y-3">
+                <div className="flex items-center text-sm text-gray-300">
+                  <Mail className="h-4 w-4 mr-2 text-emerald-400" />
+                  admissions@khayyam.edu
+                </div>
+                <div className="flex items-center text-sm text-gray-300">
+                  <Phone className="h-4 w-4 mr-2 text-emerald-400" />
+                  +1 (555) KHAYYAM
+                </div>
+                <div className="flex items-start text-sm text-gray-300">
+                  <MapPin className="h-4 w-4 mr-2 mt-0.5 text-emerald-400 flex-shrink-0" />
+                  1001 Technology Blvd<br />
+                  Silicon Valley, CA 94301
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        
+        {/* Newsletter Section */}
+        <div className="border-t border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="mb-4 md:mb-0">
+                <h4 className="font-bold text-lg mb-2">Stay Updated</h4>
+                <p className="text-gray-300 text-sm">Get the latest course updates and career tips delivered to your inbox.</p>
+              </div>
+              <div className="flex space-x-3">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="px-4 py-2 bg-white/10 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <button className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Bottom Footer */}
+        <div className="border-t border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+              <div className="mb-4 md:mb-0">
+                <p>&copy; 2024 Khayyam Institute of Technology. All rights reserved.</p>
+              </div>
+              <div className="flex space-x-6">
+                <button className="hover:text-emerald-400 transition-colors">Privacy Policy</button>
+                <button className="hover:text-emerald-400 transition-colors">Terms of Service</button>
+                <button className="hover:text-emerald-400 transition-colors">Cookie Policy</button>
+                <button className="hover:text-emerald-400 transition-colors">Accessibility</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

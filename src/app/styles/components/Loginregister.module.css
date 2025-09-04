@@ -1,0 +1,180 @@
+
+.content {
+  width: 550px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  margin: 23px auto;
+  background-color: #fff;
+  font-family: 'vazir', sans-serif;
+  justify-content: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #333;
+  margin: 0 0 46px 0px;
+}
+
+.input {
+  width: 90%;
+  height: 50px;
+  margin: 20px auto;
+  padding: 0 15px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 18px;
+  outline: none;
+  transition: border-color 0.5s ease;
+  font-family: 'vazir', sans-serif;
+  color: black;
+  background-color: white;
+}
+
+.input:focus {
+  border-color: #796dea;
+}
+.button {
+  width: 90%;
+  height: 50px;
+  margin: 58px auto 30px 25px;
+  background-color: #0000ff;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:0.3s ease;
+  font-family: 'vazir', sans-serif;
+}
+
+.button:hover {
+  background-color: #16037f;
+  border-radius: 15px;
+}
+
+.button:active {
+  background-color: #1c05ed;
+}
+.sabt {
+  font-size: 30px;
+  color: green;
+    font-family: 'vazir', sans-serif;
+}
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  padding: 9%;
+}
+.matn{
+  color: rgb(109, 109, 109);
+  background-color: white;
+  transition: ease-in 0.5s;
+  font-family: 'vazir', sans-serif;
+  padding: 0 0 0 0;
+  margin: 30px 50px 0 0;
+  float: right;
+}
+.customCheckbox {
+  position: relative;
+  padding-right: 35px;  /* فاصله برای چک‌باکس سمت راست */
+  padding-left: 0;
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+  display: inline-block;
+  direction: rtl;  /* می‌تونی حذف کنی اگر لازم نیست */
+  color: #333;
+  margin: 0px 0px 0px 64px;
+}
+
+/* مخفی کردن input اصلی */
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  cursor: pointer;
+}
+
+/* ظاهر چک‌باکس سفارشی */
+.checkmark {
+  position: absolute;
+  right: 0;  /* به جای left */
+  top: 50%;
+  transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  transition: background-color 0.1s, border-color 0.1s;
+  margin: 15px 30px 0 0;
+}
+
+/* وقتی چک‌باکس انتخاب شده */
+.checkbox:checked + .checkmark {
+  background-color: #007bff; /* آبی */
+  border-color: #007bff;     /* کادر آبی */
+}
+
+/* تیک */
+.checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 12px;
+  border: solid white; /* تیک سفید */
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* نمایش تیک وقتی چک‌باکس انتخاب شده */
+.checkbox:checked + .checkmark::after {
+  display: block;
+}
+
+/* متن کنار چک‌باکس */
+.checkboxText {
+  display: inline-block;
+  margin-left: 10px; /* فاصله متن از چک‌باکس سمت چپ */
+  vertical-align: middle;
+  user-select: none;
+  font-family: 'vazir', sans-serif;
+  color: #333;
+}
+.link {
+  color: #1900ff;
+  font-size: 25px;
+  font-family: 'vazir', sans-serif;
+  margin: 0 30px 0 0;
+}
+.content_link {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5%;
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 100px;
+}
+.sign_up {
+  color: #727272;
+  font-size: 20px;
+  font-family: 'vazir', sans-serif;
+  margin: 5px 0 0 0;
+
+}
+
