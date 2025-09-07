@@ -31,14 +31,14 @@ interface HomePageProps {
 export function HomePage({ onPageChange }: HomePageProps) {
   // ---------- data ----------
   const languages = [
-    { name: "JavaScript", icon: "🟨" },
+    { name: "Html css", icon: "🟨" },
+    { name: "Java script", icon: "🟢" },
+    { name: "php", icon: "🐹" },
     { name: "Python", icon: "🐍" },
-    { name: "React", icon: "⚛️" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "TypeScript", icon: "🔷" },
-    { name: "Java", icon: "☕" },
-    { name: "C++", icon: "🔧" },
-    { name: "Go", icon: "🐹" },
+    { name: "Artificial Intelligence", icon: "🔷" },
+    { name: "Bootstrap & Tailwind css", icon: "☕" },
+    { name: "Laravel", icon: "🔧" },
+    { name: "React Next", icon: "⚛️" },
   ];
 
   const features = [
@@ -285,7 +285,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">Master Popular Technologies</h2>
+            <h2 className="text-4xl font-bold mb-4">تسلط بر فناوری‌های پرطرفدار</h2>
             <p className="text-xl text-gray-300">
               Learn the most in-demand programming languages and frameworks
             </p>

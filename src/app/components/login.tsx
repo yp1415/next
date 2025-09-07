@@ -36,6 +36,7 @@ export default function Login() {
     console.log(result);
     localStorage.setItem("token", result.data.access_token)
     setLoading(false);
+    
 
     if(!result.success){
       setError(result.errors?.[0] || "خطا در ورود");
