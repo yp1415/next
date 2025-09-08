@@ -1,3 +1,4 @@
+import { div } from "framer-motion/client";
 import React from "react";
 
 interface CourseCardProps {
@@ -23,7 +24,7 @@ export function CourseCard({
 }: CourseCardProps) {
   return (
     <div
-      className={`h-30 m-5 w-full flex items-center justify-between p-4 rounded-lg shadow-md border ${
+      className={`h-30 m-1 w-full flex items-center justify-between p-4 rounded-lg shadow-md border ${
         isActive ? "border-indigo-500 bg-indigo-50" : "border-gray-200 bg-white"
       }`}
     >
@@ -47,6 +48,8 @@ export function CourseCard({
 
       {/* Price, Start Date, Students */}
       <div className="flex flex-col items-end gap-1">
+        
+      <button className="text-gray-500 hover:text-gray-700">⋮</button>
         <span className="font-bold text-indigo-600">{price}</span>
         <span className="text-gray-500 text-sm">Start: {startDate}</span>
         <span className="text-gray-500 text-sm">{studentCount} students</span>
