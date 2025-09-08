@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { getCourse } from "@/lib/model/student";
+import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
 import React from "react";
@@ -34,7 +35,25 @@ const barData = [
 
 export default function Dashboard() {
 
-   const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("students");
+  const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("students");
+  const [courses,setCourses] = useState<any[]>([]);
+  const [loading,setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCourses() {
+      const result = await getCourse();
+      if (result.success) {
+        setCourses(result.data); // adjust if API nests data (e.g. result.data.courses)
+      } else {
+        console.error(result.errors);
+      }
+      setLoading(false);
+    }
+
+    fetchCourses();
+  },[])
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -59,7 +78,9 @@ export default function Dashboard() {
             }`}>
             students
           </button>
-          <button className="block px-3 py-2 rounded-lg hover:bg-blue-500" value={'courses'}/>
+          <button className="block px-3 py-2 rounded-lg hover:bg-blue-500">
+            دوره‌ها
+          </button>
             
           
           <button className="block px-3 py-2 rounded-lg hover:bg-blue-500" value={'Reports'}/>
@@ -197,19 +218,22 @@ export default function Dashboard() {
       </main>
       )}
 
-      {activeTab==="students" && (
-        <CourseCard
-  title="English 101"
-  price="$250"
-  time="10:00 AM - 12:00 PM"
-  days="Mon, Wed, Fri"
-  profileImg="/path-to-lang-icon.png"
-  isActive={true}
-  startDate="07 Sep, 2025"
-  studentCount={25}
-/>
+{activeTab === "students" && 
+  courses.map((course, id) => (
+    <CourseCard
+      key={id} 
+      title={course.title} 
+      price={`${course.price} تومان`}
+      time={course.time}
+      days={course.days}
+      profileImg="/path-to-lang-icon.png"
+      isActive={course.is_active}
+      startDate={course.start_of_class}
+      studentCount={course.students_count}
+    />
+  ))
+}
 
-      )}
 
       {/* {activeTab==="courses" && (
 
