@@ -45,7 +45,7 @@ export default function Dashboard() {
       if (result.success) {
         setCourses(result.data.courses) 
       } else {
-        console.error(result.errors);
+        // console.error(result.errors);
       }
       setLoading(false);
     }

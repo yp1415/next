@@ -24,7 +24,7 @@ export function CourseCard({
 }: CourseCardProps) {
   return (
     <div
-      className={`h-30 m-1 w-full flex items-center justify-between p-4 rounded-lg shadow-md border ${
+      className={`h-30 m-1 w-full flex items-center justify-between p-4 rounded-lg text-black shadow-md border ${
         isActive ? "border-indigo-500 bg-indigo-50" : "border-gray-200 bg-white"
       }`}
     >
@@ -33,7 +33,6 @@ export function CourseCard({
         <div className="relative">
           <img
             src={profileImg}
-            alt={title}
             className="w-12 h-12 rounded-full object-cover border-2 border-gray-300"
           />
           {isActive && (

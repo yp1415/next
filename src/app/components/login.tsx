@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 
 interface User {
   name: string;
-  email?: string;
+  mobile?: string;
   role?: string;
 }
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [acceptedRules, setAcceptedRules] = useState(false);
   const [user, setUser] = useState<User | null>(null);
@@ -32,7 +32,7 @@ export default function Login() {
     setLoading(true);
     setError("")
 
-    const result = await login(email,password);
+    const result = await login(mobile,password);
     console.log(result);
     localStorage.setItem("token", result.data.access_token)
     setLoading(false);
@@ -66,11 +66,11 @@ export default function Login() {
         <h1 className={styles.title}>ورود</h1>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
+            type="mobile"
             className={styles.input}
-            placeholder="ایمیل خود را وارد کنید"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="تلفن خود را وارد کنید"
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
             required
           />
           <input
