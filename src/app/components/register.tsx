@@ -5,7 +5,7 @@ import styles from "@/app/styles/components/Loginregister.module.css";
 
 interface FormData {
   name: string;
-  email: string;
+  mobile: string;
   password: string;
   password_confirmation: string;
 }
@@ -13,13 +13,13 @@ interface FormData {
 interface User {
   id: number;
   name: string;
-  email: string;
+  mobile: string;
 }
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState<FormData>({
     name: "",
-    email: "",
+    mobile: "",
     password: "",
     password_confirmation: "",
   });
@@ -42,7 +42,7 @@ export default function RegisterForm() {
 
     const result= await register(
       formData.name,
-      formData.email,
+      formData.mobile,
       formData.password,
       formData.password_confirmation,
     )
@@ -83,10 +83,10 @@ setError(errorMessage);
             className={styles.input}
           />
           <input
-            type="email"
-            name="email"
+            type="mobile"
+            name="mobile"
             placeholder="ایمیل"
-            value={formData.email}
+            value={formData.mobile}
             onChange={handleChange}
             required
             className={styles.input}
@@ -128,7 +128,7 @@ setError(errorMessage);
           >
             <h3 className={styles.sabt}>ثبت‌نام موفق</h3>
             <p>سلام، {user.name}</p>
-            <p>ایمیل: {user.email}</p>
+            <p>ایمیل: {user.mobile}</p>
           </div>
         )}
       </div>
