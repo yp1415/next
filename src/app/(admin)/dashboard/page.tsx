@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { getCourse } from "@/lib/model/student";
+import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
 import React from "react";
@@ -34,12 +35,30 @@ const barData = [
 
 export default function Dashboard() {
 
-   const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("students");
+  const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("students");
+  const [Courses,setCourses] = useState<any[]>([]);
+  const [loading,setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCourses() {
+      const result = await getCourse();
+      if (result.success) {
+        setCourses(result.data.courses) 
+      } else {
+        // console.error(result.errors);
+      }
+      setLoading(false);
+    }
+
+    fetchCourses();
+  },[])
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-blue-600 text-white p-4 space-y-6 hidden md:block">
+      <aside className="w-65 bg-blue-600 text-white p-4 space-y-6 hidden md:block">
         <div className="flex items-center space-x-2 text-xl font-bold">
           <KhayyamLogo></KhayyamLogo>
         </div>
@@ -47,22 +66,24 @@ export default function Dashboard() {
           <button onClick={() => setActiveTab("dashboard")} className={`{ w-full block px-3 py-2 rounded-lg bg-blue-600} ${
               activeTab==="dashboard"
               ? "bg-blue-500"
-              : "bg-blue-600 display-none"
+              : "bg-blue-600"
           }`}
           >
             dashboard
           </button>
-          <button onClick={() => setActiveTab("students")} className={`{w-full block px-3 py-2 rounded-lg hover:bg-blue-500} ${
-            activeTab==="students"
+          <button onClick={() => setActiveTab("courses")} className={`w-full block px-3 py-2 rounded-lg hover:bg-blue-500 ${
+            activeTab==="courses"
             ? "bg-blue-500"
             : "bg-blue-600"
             }`}>
-            students
+            دوره‌ها
           </button>
-          <button className="block px-3 py-2 rounded-lg hover:bg-blue-500" value={'courses'}/>
+          <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500">
+            دانش‌آموزان
+          </button>
             
           
-          <button className="block px-3 py-2 rounded-lg hover:bg-blue-500" value={'Reports'}/>
+          <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500" value={'Reports'}/>
             
           
         </nav>
@@ -197,19 +218,24 @@ export default function Dashboard() {
       </main>
       )}
 
-      {activeTab==="students" && (
-        <CourseCard
-  title="English 101"
-  price="$250"
-  time="10:00 AM - 12:00 PM"
-  days="Mon, Wed, Fri"
-  profileImg="/path-to-lang-icon.png"
-  isActive={true}
-  startDate="07 Sep, 2025"
-  studentCount={25}
-/>
+{activeTab === "courses" && (
+  <div className="grid w-full m-4 grid-cols-1 md:grid-cols-2 gap-2">
+  {Courses.map((course, id) => (
+    <CourseCard
+      key={id} 
+      title={course.title} 
+      price={`${course.price} تومان`}
+      time={course.time}
+      days={course.days}
+      profileImg="/path-to-lang-icon.png"
+      isActive={course.is_active}
+      startDate={course.start_of_class}
+      studentCount={course.students_count}
+    />
+  ))}
+</div>
+)}
 
-      )}
 
       {/* {activeTab==="courses" && (
 
