@@ -24,15 +24,23 @@ export async function getCourse() {
 }
 }
 
-export async function deleteCourse(id : number){
-    const response = await fetch(`http://127.0.0.1:8000/api/courses/${id}` , {
-        method :"DELETE",
-            credentials : "include",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            }
-    })
+export async function deleteCourse(id: number) {
+  const response = await fetch(`http://127.0.0.1:8000/api/course/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  });
 
+  if (!response.ok) {
+    throw new Error(`Delete failed: ${response.status}`);
+  }
+
+  if (response.status !== 204) {
     return await response.json();
+  }
+
+  return null;
 }

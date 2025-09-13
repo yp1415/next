@@ -221,10 +221,13 @@ export default function Dashboard() {
       )}
 
 {activeTab === "courses" && (
-  <div className="flex-1 w-full m-4 cols-1 md:cols-2 gap-2">
+  <div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
+    <div>
+    </div>
   {Courses.map((course, id) => (
     <CourseCard
-      key={id} 
+      key={course.id}
+      id={course.id}
       title={course.title} 
       price={`${course.price} تومان`}
       time={course.time}
@@ -233,17 +236,14 @@ export default function Dashboard() {
       isActive={course.is_active}
       startDate={course.start_of_class}
       studentCount={course.students_count}
+      onDelete={(id) => {
+      setCourses((prev) => prev.filter((c) => c.id !== id));
+      }}
     />
   ))}
 </div>
 )}
-
-
-      {/* {activeTab==="courses" && (
-
-      )} */}
-
-    </div>
+  </div>
   );
 }
 ``
