@@ -1,6 +1,6 @@
 "use client";
 
-import { getCourse } from "@/lib/model/student";
+import { getCourse , deleteCourse } from "@/lib/model/student";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
@@ -35,7 +35,7 @@ const barData = [
 
 export default function Dashboard() {
 
-  const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("students");
+  const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("dashboard");
   const [Courses,setCourses] = useState<any[]>([]);
   const [loading,setLoading] = useState(true);
 
@@ -52,6 +52,8 @@ export default function Dashboard() {
 
     fetchCourses();
   },[])
+
+
 
   if (loading) return <p>Loading...</p>;
 
@@ -106,7 +108,7 @@ export default function Dashboard() {
         </header>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-4 rounded-2xl shadow">
             <p className="text-gray-500">Total Students</p>
             <h2 className="text-2xl font-bold">932</h2>
@@ -219,7 +221,7 @@ export default function Dashboard() {
       )}
 
 {activeTab === "courses" && (
-  <div className="grid w-full m-4 grid-cols-1 md:grid-cols-2 gap-2">
+  <div className="flex justify-start w-full m-4 cols-1 md:cols-2 gap-2 item-start">
   {Courses.map((course, id) => (
     <CourseCard
       key={id} 
