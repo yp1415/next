@@ -1,6 +1,6 @@
 "use client";
 
-import { getCourse , deleteCourse } from "@/lib/model/student";
+import { getCourse , deleteCourse } from "@/lib/model/course";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
@@ -221,7 +221,7 @@ export default function Dashboard() {
       )}
 
 {activeTab === "courses" && (
-  <div className="flex justify-start w-full m-4 cols-1 md:cols-2 gap-2 item-start">
+  <div className="flex-1 w-full m-4 cols-1 md:cols-2 gap-2">
   {Courses.map((course, id) => (
     <CourseCard
       key={id} 

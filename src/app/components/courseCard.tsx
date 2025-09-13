@@ -40,6 +40,7 @@ export function CourseCard({
           )}
         </div>
         <div>
+          <button></button>
           <h3 className="font-semibold text-lg">{title}</h3>
           <p className="text-gray-500 text-sm">{days} • {time}</p>
         </div>
