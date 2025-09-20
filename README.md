@@ -1,36 +1,174 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+import React, { useMemo, useState } from "react";
+import AddUserModal from "./AddUserModal";
 
-## Getting Started
+const SAMPLE = Array.from({ length: 60 }).map((_, i) => ({
+  id: i + 1,
+  name: ["Ali", "Sara", "Reza", "Mina", "Omid"][i % 5],
+  lastName: ["Hosseini", "Karimi", "Ahmadi", "Moradi", "Soleimani"][i % 5],
+  nationalId: String(1000000000 + i),
+  mobile: `09${(100000000 + i).toString().slice(1)}`,
+  courses: ["Math", "Physics", "History", "Programming"][i % 4],
+}));
 
-First, run the development server:
+export default function DataTable({ data = SAMPLE }) {
+  const [tableData, setTableData] = useState(data);
+  const [query, setQuery] = useState("");
+  const [perPage, setPerPage] = useState(12);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  const filtered = useMemo(() => {
+    if (!query) return tableData;
+    const q = query.trim().toLowerCase();
+    return tableData.filter((row) => {
+      return (
+        String(row.id).includes(q) ||
+        (row.name && row.name.toLowerCase().includes(q)) ||
+        (row.lastName && row.lastName.toLowerCase().includes(q)) ||
+        (row.nationalId && row.nationalId.toLowerCase().includes(q)) ||
+        (row.mobile && row.mobile.toLowerCase().includes(q)) ||
+        (row.courses && String(row.courses).toLowerCase().includes(q))
+      );
+    });
+  }, [tableData, query]);
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  const handleAddUser = (newUser) => {
+    setTableData([...tableData, { id: tableData.length + 1, ...newUser }]);
+  };
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 p-6 font-sans">
+      <div className="max-w-6xl mx-auto">
+        <header className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-semibold leading-tight ">
+              فهرست کاربران
+            </h1>
+          
+          </div>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+          <div className="flex items-center gap-3">
+            <label className="relative block">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="جستجو بر اساس نام، موبایل، یا کد ملی..."
+                className="w-72 sm:w-96 pl-4 pr-10 py-2 rounded-lg border border-gray-200 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+              />
+              <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 pointer-events-none">
+                🔎
+              </span>
+            </label>
 
-## Learn More
+            <select
+              value={perPage}
+              onChange={(e) => setPerPage(Number(e.target.value))}
+              className="px-3 py-2 rounded-lg border border-gray-200 shadow-sm bg-white text-gray-500"
+            >
+              <option value={6}>6 / صفحه</option>
+              <option value={12}>12 / صفحه</option>
+              <option value={24}>24 / صفحه</option>
+            </select>
+          </div>
+        </header>
 
-To learn more about Next.js, take a look at the following resources:
+        <main>
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+            <div className="p-4 border-b border-gray-100 flex justify-between items-center">
+              <p className="text-sm text-gray-500">
+                نتایج: {filtered.length} مورد
+              </p>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-3 py-1 rounded-md bg-indigo-600 text-white shadow-sm"
+              >
+                افزودن کاربر جدید
+              </button>
+            </div>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+            <div className="max-h-[62vh] overflow-y-auto w-full">
+              <table className="min-w-full table-fixed">
+                <thead className="sticky top-0 bg-gradient-to-r from-indigo-50 to-white/50 z-10">
+                  <tr className="text-gray-600 text-xs sm:text-sm">
+                    <th className="px-4 py-3 text-right">id</th>
+                    <th className="px-4 py-3 text-right">name</th>
+                    <th className="px-4 py-3 text-right">lastName</th>
+                    <th className="px-4 py-3 text-right">nationalId</th>
+                    <th className="px-4 py-3 text-right">mobile</th>
+                    <th className="px-4 py-3 text-right">courses</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.slice(0, perPage).map((row, idx) => (
+                    <tr
+                      key={row.id}
+                      className={`border-b last:border-b-0 hover:bg-gray-50 ${
+                        idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                      }`}
+                    >
+                      <td className="px-4 py-3 text-right text-sm font-medium text-gray-700">
+                        {row.id}
+                      </td>
+                      <td className="px-4 py-3 text-right text-sm text-gray-700">
+                        {row.name}
+                      </td>
+                      <td className="px-4 py-3 text-right text-sm text-gray-700">
+                        {row.lastName}
+                      </td>
+                      <td className="px-4 py-3 text-right text-sm text-gray-700">
+                        {row.nationalId}
+                      </td>
+                      <td className="px-4 py-3 text-right text-sm text-gray-700">
+                        {row.mobile}
+                      </td>
+                      <td className="px-4 py-3 text-right text-sm text-gray-700">
+                        {row.courses}
+                      </td>
+                    </tr>
+                  ))}
+                  {filtered.length === 0 && (
+                    <tr>
+                      <td
+                        colSpan={6}
+                        className="px-4 py-8 text-center text-gray-400"
+                      >
+                        هیچ موردی پیدا نشد
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+            <div className="p-4 flex items-center justify-between text-sm text-gray-500 border-t">
+              <div>
+                نمایش {Math.min(filtered.length, perPage)} از {filtered.length}
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                  className="px-3 py-1 rounded-md border border-gray-200 bg-white shadow-sm"
+                >
+                  بالا
+                </button>
+              </div>
+            </div>
+          </div>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+          {/* Add User Modal */}
+          <AddUserModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onAdd={(user) =>
+              setTableData([
+                ...tableData,
+                { id: tableData.length + 1, ...user },
+              ])
+            }
+          />
+        </main>
+      </div>
+    </div>
+  );
+}
