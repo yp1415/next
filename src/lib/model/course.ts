@@ -44,3 +44,37 @@ export async function deleteCourse(id: number) {
 
   return null;
 }
+
+export async function addCourse(course: {
+  title: string;
+  price: string;
+  time: string;
+  days: string;
+  is_active: boolean;
+  start_of_class: string;
+  students_count: string;
+}) 
+{
+  try{
+    const response = await fetch("http://127.0.0.1:8000/api/course/create" , {
+      method :"POST",
+      credentials : "include",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        },
+      body: JSON.stringify(course),
+    });
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            return { success: false, errors: data.errors || [data.message] };
+        }
+
+    return { success: true, data };
+    
+    } catch (error: any) {
+    return { success: false, errors: [error.message || "Unknown error"] };
+    }
+}

@@ -4,6 +4,7 @@ import { getCourse , deleteCourse } from "@/lib/model/course";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
+import { AddCourseModal } from "@/app/components/ui/addCourseModal";
 import React from "react";
 import {
   LineChart,
@@ -38,6 +39,7 @@ export default function Dashboard() {
   const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("dashboard");
   const [Courses,setCourses] = useState<any[]>([]);
   const [loading,setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchCourses() {
@@ -222,7 +224,13 @@ export default function Dashboard() {
 
 {activeTab === "courses" && (
   <div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
-    <div>
+    <div className="flex flex-col">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="px-3 py-1 rounded-md bg-indigo-600 text-white shadow-sm"
+      >
+        افزودن دوره
+      </button>
     </div>
   {Courses.map((course, id) => (
     <CourseCard
@@ -241,6 +249,11 @@ export default function Dashboard() {
       }}
     />
   ))}
+  <AddCourseModal
+    isOpen={isModalOpen}
+    onClose={() => setIsModalOpen(false)}
+    onAdd={(newCourse) => setCourses((prev) => [...prev, newCourse])}
+  />
 </div>
 )}
   </div>
