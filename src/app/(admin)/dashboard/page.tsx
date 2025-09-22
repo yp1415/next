@@ -1,6 +1,6 @@
 "use client";
 
-import { getCourse , deleteCourse } from "@/lib/model/course";
+import { getCourse } from "@/lib/model/course";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";

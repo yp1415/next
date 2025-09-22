@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 
+import { getCourse } from "@/lib/model/course";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -29,6 +30,20 @@ interface HomePageProps {
 }
 
 export function HomePage({ onPageChange }: HomePageProps) {
+
+  const [coursesData, setCoursesData] = useState<any[]>([]); // rename variable
+
+  useEffect(() => {
+    async function fetchCourses() {
+      const result = await getCourse(); // getCourse برمی‌گردونه { success, data, errors }
+      if (result.success && result.data) {
+        setCoursesData(result.data); // فقط آرایه داده‌ها رو ست کنیم
+      } else {
+        console.error(result.errors);
+      }
+    }
+    fetchCourses();
+  }, []);
   // ---------- data ----------
   const languages = [
     { name: "Html css", icon: "🟨" },
@@ -44,75 +59,31 @@ export function HomePage({ onPageChange }: HomePageProps) {
   const features = [
     {
       icon: Rocket,
-      title: "Industry-Focused Projects",
+      title: "دوره‌های پروژه‌محور",
       description:
-        "Build enterprise-grade applications with real-world impact from day one.",
+        "تمام دوره‌ها همراه با انجام پروژه تدریس می‌شوند.",
       gradient: "from-emerald-400 to-teal-500",
     },
     {
       icon: Brain,
-      title: "Advanced Learning Systems",
+      title: "پشتیبانی دایمی استاد",
       description:
-        "Experience cutting-edge educational technology with personalized AI assistance.",
+        "استاد در تمام طول دوره و پس از آن، پاسخگوی سوالات شما خواهد بود.",
       gradient: "from-cyan-400 to-blue-500",
     },
     {
       icon: Globe,
-      title: "International Excellence",
+      title: "همراهی در کسب درآمد",
       description:
-        "Join a prestigious global network of Khayyam technology professionals.",
+        "عضوی از تیم ما شوید، پروژه دریافت کنید و در محیط مناسب کار و درآمد کسب کنید.",
       gradient: "from-teal-400 to-emerald-500",
     },
     {
       icon: Target,
-      title: "Elite Career Services",
+      title: "آموزش مهارت‌های مفید",
       description:
-        "Premium career placement with guaranteed opportunities at leading tech companies.",
+        "با یادگیری برنامه‌نویسی آینده خود را تضمین کنید.",
       gradient: "from-blue-400 to-cyan-500",
-    },
-  ];
-
-  const courses = [
-    {
-      title: "Full Stack Web Development",
-      description:
-        "Master modern web development with React, Node.js, and cloud deployment.",
-      duration: "16 weeks",
-      level: "Beginner to Advanced",
-      price: "$1,299",
-      originalPrice: "$1,899",
-      image:
-        "https://images.unsplash.com/photo-1753715613373-90b1ea010731?w=1080",
-      rating: 4.9,
-      students: "2.5k+",
-      popular: true,
-    },
-    {
-      title: "Python & AI/ML",
-      description:
-        "Learn Python programming with focus on artificial intelligence and machine learning.",
-      duration: "20 weeks",
-      level: "Intermediate",
-      price: "$1,499",
-      originalPrice: "$2,199",
-      image: "https://images.unsplash.com/photo-1624948384140-e48e47087fad?w=1080",
-      rating: 4.8,
-      students: "1.8k+",
-      popular: false,
-    },
-    {
-      title: "Mobile App Development",
-      description:
-        "Build cross-platform mobile apps with React Native and Flutter.",
-      duration: "14 weeks",
-      level: "Intermediate",
-      price: "$1,199",
-      originalPrice: "$1,699",
-      image:
-        "https://images.unsplash.com/photo-1582005450386-52b25f82d9bb?w=1080",
-      rating: 4.7,
-      students: "1.2k+",
-      popular: false,
     },
   ];
 
@@ -347,12 +318,11 @@ export function HomePage({ onPageChange }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              The Khayyam Advantage
+            <h2 className="text-4xl md:text-5xl bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent font-bold mb-6">
+              مزیت‌های خیام
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience the future of technology education with industry-leading
-              curriculum and world-class facilities
+              با برنامه درسی پیشرو در صنعت و امکانات درجه یک، آینده آموزش فناوری را تجربه کنید.
             </p>
           </motion.div>
 
@@ -397,12 +367,11 @@ export function HomePage({ onPageChange }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              World-Class Learning Environment
+            <h2 className="text-4xl text-blue-400 md:text-5xl font-bold mb-6">
+              آموزشگاهی برای تنبل‌ها!
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience education in state-of-the-art facilities designed for
-              innovation and excellence
+              نگران خستگی و بی‌حوصلگی نباشید، ما در کنارتان هستیم!
             </p>
           </motion.div>
 
@@ -498,7 +467,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {courses.map((course, index) => (
+            {coursesData.map((course, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -510,7 +479,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
                   {course.popular && (
                     <div className="absolute top-4 left-4 z-10">
                       <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold">
-                        🔥 Most Popular
+                        🔥 محبوب‌ترین‌ دوره‌ها
                       </Badge>
                     </div>
                   )}

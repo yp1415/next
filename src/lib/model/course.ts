@@ -1,4 +1,5 @@
 import { time } from "console";
+import { title } from "process";
 
 export async function getCourse() {
     try{
@@ -30,7 +31,7 @@ export async function deleteCourse(id: number) {
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     },
   });
 
@@ -45,36 +46,28 @@ export async function deleteCourse(id: number) {
   return null;
 }
 
-export async function addCourse(course: {
-  title: string;
-  price: string;
-  time: string;
-  days: string;
-  is_active: boolean;
-  start_of_class: string;
-  students_count: string;
-}) 
+export async function addCourse(course: FormData)
 {
-  try{
-    const response = await fetch("http://127.0.0.1:8000/api/course/create" , {
-      method :"POST",
-      credentials : "include",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        },
-      body: JSON.stringify(course),
+  try {
+    const res = await fetch("http://localhost:8000/api/course/create", {
+      method: "POST",
+      body: course,
     });
 
-        const data = await response.json()
-
-        if (!response.ok) {
-            return { success: false, errors: data.errors || [data.message] };
-        }
-
-    return { success: true, data };
-    
-    } catch (error: any) {
-    return { success: false, errors: [error.message || "Unknown error"] };
+  if (!res.ok) {
+    let details = "";
+    try {
+      const err = await res.json();
+      details = JSON.stringify(err, null, 2);
+    } catch {
+      details = res.statusText;
     }
+    throw new Error(`Failed to create course: ${details}`);
+}
+
+    return await res.json();
+  } catch (err) {
+    console.error("API Error:", err);
+    throw err; // rethrow so components can handle it
+  }
 }
