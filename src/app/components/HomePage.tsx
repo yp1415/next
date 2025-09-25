@@ -37,7 +37,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
     async function fetchCourses() {
       const result = await getCourse(); // getCourse برمی‌گردونه { success, data, errors }
       if (result.success && result.data) {
-        setCoursesData(result.data); // فقط آرایه داده‌ها رو ست کنیم
+        setCoursesData(result.data.courses?? []);
+        console.log(result.data.courses);
+        
       } else {
         console.error(result.errors);
       }
@@ -391,9 +393,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-xl font-bold mb-2">Innovation Labs</h3>
+                  <h3 className="text-xl font-bold mb-2">پرورش خلاقیت</h3>
                   <p className="text-sm text-gray-200">
-                    State-of-the-art development environments
+                    پرسش‌های نوآورانه برای ارتقای قدرت حل مسیله
                   </p>
                 </div>
               </div>
@@ -414,9 +416,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-xl font-bold mb-2">Smart Classrooms</h3>
+                  <h3 className="text-xl font-bold mb-2">کلاس‌های هوشمند</h3>
                   <p className="text-sm text-gray-200">
-                    Interactive learning spaces with latest technology
+                    آموزش همراه با تکنولوژی بالا در اختیار همه
                   </p>
                 </div>
               </div>
@@ -437,9 +439,9 @@ export function HomePage({ onPageChange }: HomePageProps) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-xl font-bold mb-2">Success Stories</h3>
+                  <h3 className="text-xl font-bold mb-2">داستان موفقیت</h3>
                   <p className="text-sm text-gray-200">
-                    Celebrating our graduates' achievements
+                    چه بودیم و چه شدیم
                   </p>
                 </div>
               </div>
@@ -457,17 +459,16 @@ export function HomePage({ onPageChange }: HomePageProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Popular Bootcamps
+            <h2 className="text-4xl text-blue-400 md:text-5xl font-bold mb-6">
+              محبوب‌ترین دوره‌ها
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Intensive, project-based programs designed to get you job-ready
-              fast
+              دوره‌های پروژه‌محور با پشتیبانی دائمی برای آماده سازی هرچه سریع‌تر برای شغل‌های واقعی
             </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {coursesData.map((course, index) => (
+            {coursesData.slice(0,3).map((course, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -495,7 +496,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
 
                   <CardHeader>
                     <div className="flex justify-between items-start mb-2">
-                      <CardTitle className="text-xl font-bold">
+                      <CardTitle className="text-xl text-gray-700 font-bold">
                         {course.title}
                       </CardTitle>
                       <div className="flex items-center space-x-1 text-yellow-500">
@@ -511,14 +512,14 @@ export function HomePage({ onPageChange }: HomePageProps) {
                   </CardHeader>
 
                   <CardContent>
-                    <div className="flex justify-between items-center text-sm text-gray-600 mb-6">
+                    <div className="flex items-center text-sm text-gray-600 mb-6">
                       <div className="flex items-center">
                         <Clock className="h-4 w-4 mr-1" />
-                        {course.duration}
+                        {course.time}
                       </div>
+                        <Users className="h-4 w-4 ml-2 mr-5" />
                       <div className="flex items-center">
-                        <Users className="h-4 w-4 mr-1" />
-                        {course.students} enrolled
+                        {course.students_count} شرکت کننده
                       </div>
                       <Badge variant="secondary">{course.level}</Badge>
                     </div>
@@ -526,14 +527,14 @@ export function HomePage({ onPageChange }: HomePageProps) {
                     <div className="flex justify-between items-center">
                       <div>
                         <span className="text-2xl font-bold text-indigo-600">
-                          {course.price}
+                          {course.price} تومان
                         </span>
                         <span className="text-sm text-gray-500 line-through ml-2">
                           {course.originalPrice}
                         </span>
                       </div>
                       <Button className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 shadow-lg">
-                        Enroll Now
+                        اطلاعات بیشتر
                       </Button>
                     </div>
                   </CardContent>

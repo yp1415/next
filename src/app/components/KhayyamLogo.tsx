@@ -74,9 +74,9 @@ export function KhayyamLogo({ size = 'md', className = '', animated = true }: Kh
       {/* Brand Text */}
       <div>
         <span className={`${textSizes[size]} font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent`}>
-          Khayyam
+          خیام
         </span>
-        <div className="text-xs text-gray-500 -mt-1 font-medium">
+        <div className="text-xs text-gray-500 -mt-1 mr-1 font-medium">
           آموزشگاه فنی‌و‌حرفه‌ای
         </div>
       </div>

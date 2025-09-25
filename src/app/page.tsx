@@ -49,8 +49,7 @@ export default function App() {
                 <KhayyamLogo size="md" className="text-white" />
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed max-w-md">
-                Khayyam Institute of Technology - Where innovation meets excellence. Transforming careers through 
-                world-class education and cutting-edge technology training since our founding.
+                موسسه خیام تکنولوژی – جایی که نوآوری با برتری آمیخته می‌شود. از زمان تأسیس، مسیر حرفه‌ای افراد را با آموزش‌های درجه یک و دوره‌های فناورانه پیشرفته متحول کرده است.
               </p>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
@@ -68,36 +67,32 @@ export default function App() {
             
             {/* Quick Links */}
             <div>
-              <h3 className="font-bold text-lg mb-6 text-white">Programs</h3>
+              <h3 className="font-bold text-lg mb-6 text-white">دوره‌ها</h3>
               <ul className="space-y-3">
-                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">Full Stack Development</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Python & AI/ML</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Mobile Development</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">DevOps & Cloud</button></li>
-                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">All Programs</button></li>
+                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">هوش مصنوعی</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">پایتون</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">برنامه‌نویسی اندروید</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">توسعه وب فول‌استک</button></li>
+                <li><button onClick={() => setCurrentPage('courses')} className="text-gray-300 hover:text-emerald-400 transition-colors">همه دوره‌ها</button></li>
               </ul>
             </div>
             
             {/* Company */}
             <div>
-              <h3 className="font-bold text-lg mb-6 text-white">Company</h3>
+              <h3 className="font-bold text-lg mb-6 text-white">آموزشگاه</h3>
               <ul className="space-y-3">
-                <li><button onClick={() => setCurrentPage('about')} className="text-gray-300 hover:text-emerald-400 transition-colors">About Khayyam</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Faculty</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Careers</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Research</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">News</button></li>
+                <li><button onClick={() => setCurrentPage('about')} className="text-gray-300 hover:text-emerald-400 transition-colors">درباره خیام</button></li>
               </ul>
             </div>
             
             {/* Support & Contact */}
             <div>
-              <h3 className="font-bold text-lg mb-6 text-white">Support</h3>
+              <h3 className="font-bold text-lg mb-6 text-white">پشتیبانی</h3>
               <ul className="space-y-3 mb-6">
                 <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Help Center</button></li>
                 <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Alumni Network</button></li>
                 <li><button onClick={() => setCurrentPage('contact')} className="text-gray-300 hover:text-emerald-400 transition-colors">Contact Us</button></li>
-                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">Student Portal</button></li>
+                <li><button className="text-gray-300 hover:text-emerald-400 transition-colors">ورود دانش‌آموز</button></li>
               </ul>
               
               {/* Contact Info */}
@@ -108,12 +103,12 @@ export default function App() {
                 </div>
                 <div className="flex items-center text-sm text-gray-300">
                   <Phone className="h-4 w-4 mr-2 text-emerald-400" />
-                  +1 (555) KHAYYAM
+                  09233333333
                 </div>
                 <div className="flex items-start text-sm text-gray-300">
                   <MapPin className="h-4 w-4 mr-2 mt-0.5 text-emerald-400 flex-shrink-0" />
-                  1001 Technology Blvd<br />
-                  Silicon Valley, CA 94301
+                  خیابان حسینی معصوم،<br />
+                  جنب سینما عمیق، طبقه 4، واحد 404
                 </div>
               </div>
             </div>
