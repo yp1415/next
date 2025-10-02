@@ -1,6 +1,3 @@
-import { time } from "console";
-import { title } from "process";
-
 export async function getCourse() {
     try{
         const response = await fetch("http://127.0.0.1:8000/api/course/getall" , {

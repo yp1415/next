@@ -387,7 +387,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
             >
               <div className="relative h-80">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1718220216044-006f43e3a9b1?w=1080"
+                  src="https://s44783.pcdn.co/in/wp-content/uploads/sites/3/2022/07/innovation.jpg.optimal.jpg"
                   alt="Modern Tech Workspace"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -551,7 +551,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
               className="border-2 border-indigo-500 text-indigo-600 hover:bg-indigo-500 hover:text-white px-8 py-3 text-lg transition-all duration-300"
             >
               <BookOpen className="mr-2 h-5 w-5" />
-              View All Bootcamps
+              مشاهده تمام دوره‌ها
             </Button>
           </div>
         </div>

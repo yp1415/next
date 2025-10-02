@@ -7,7 +7,7 @@ interface CourseCardProps {
   price: string;
   time: string;
   days: string;
-  profileImg: string;
+  image: string;
   isActive?: boolean;
   startDate: string;
   studentCount: number;
@@ -21,7 +21,7 @@ export function CourseCard({
   price,
   time,
   days,
-  profileImg,
+  image,
   isActive = false,
   startDate,
   studentCount,
@@ -63,7 +63,7 @@ export function CourseCard({
 
   return (
     <div
-      className={`h-35 m-3 w-97/100 flex items-center justify-between p-4 rounded-lg text-black shadow-md border ${
+      className={`h-35 m-3 w-97/100 flex items-center justify-between p-7 rounded-lg text-black shadow-md border ${
         isActive ? "" : ""
       }`}
     >
@@ -71,7 +71,7 @@ export function CourseCard({
       <div className="flex items-center gap-4">
         <div className="relative">
           <img
-            src={profileImg}
+            src={image}
             className="w-12 h-12 rounded-full object-cover border-2 border-gray-300"
           />
           {isActive && (
