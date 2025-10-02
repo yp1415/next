@@ -34,27 +34,27 @@ export function ContactPage() {
   const contactMethods = [
     {
       icon: Phone,
-      title: 'Phone',
-      detail: '+1 (555) 123-4567',
-      description: 'Call us for immediate assistance',
+      title: 'تلفن',
+      detail: '09363193328',
+      description: 'برای کمک در هر زمانی تماس بگیرید',
     },
     {
       icon: Mail,
-      title: 'Email',
-      detail: 'info@codeinstitute.com',
-      description: 'Send us an email anytime',
+      title: 'اینستاگرام',
+      detail: 'KHAYYAM01.IR',
+      description: 'باخبر باشید',
     },
     {
       icon: MapPin,
-      title: 'Office',
-      detail: '123 Tech Street, Silicon Valley, CA 94043',
-      description: 'Visit our main campus',
+      title: 'آدرس',
+      detail: 'خیابان حسینی معصوم، جنب سینما عمیق، مجتمع اداری اوج، طبقه 4',
+      description: 'ملاقات با ما',
     },
     {
       icon: Clock,
-      title: 'Office Hours',
-      detail: 'Mon-Fri: 9AM-6PM PST',
-      description: 'We are here to help',
+      title: 'ساعات حضور',
+      detail: 'شنبه تا پنجشنبه: 14:00-10:00، 21:00-16:00',
+      description: 'برای کمک به شما حضور داریم',
     },
   ];
 
@@ -106,11 +106,11 @@ export function ContactPage() {
       <section className="bg-gradient-to-r from-indigo-500 to-purple-600 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get in Touch
+            با ما در ارتباط باشید
           </h1>
           <p className="text-xl text-indigo-100 max-w-2xl mx-auto">
-            Have questions about our courses or need help getting started? 
-            We're here to help you on your programming journey.
+            سوالی درباره دوره‌ها دارید یا می‌خواهید شروع کنید؟ 
+            ما کنار شما هستیم تا مسیر برنامه‌نویسی‌تان را هموار کنیم.
           </p>
         </div>
       </section>

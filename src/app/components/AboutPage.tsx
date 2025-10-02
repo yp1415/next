@@ -7,18 +7,18 @@ export function AboutPage() {
   const values = [
     {
       icon: Target,
-      title: 'Excellence',
-      description: 'We strive for excellence in everything we do, from curriculum design to student support.',
+      title: 'بهترین بودن',
+      description: 'ما در هر آنچه انجام می‌دهیم، از طراحی محتوای آموزشی گرفته تا پشتیبانی از دانشجویان، همواره در پی دستیابی به بالاترین سطح کیفیت و برتری هستیم.',
     },
     {
       icon: Heart,
-      title: 'Student-Centric',
-      description: 'Our students are at the heart of everything we do. Their success is our success.',
+      title: 'برای هنرجو',
+      description: 'دانشجویان در قلب تمام فعالیت‌های ما قرار دارند؛ موفقیت آنان، موفقیت ماست.',
     },
     {
       icon: Lightbulb,
-      title: 'Innovation',
-      description: 'We continuously innovate our teaching methods to stay ahead of industry trends.',
+      title: 'نوآوری',
+      description: 'ما همواره روش‌های آموزشی خود را نوآورانه به‌روزرسانی می‌کنیم تا همگام با روندهای روز صنعت باقی بمانیم.',
     },
   ];
 
@@ -50,17 +50,17 @@ export function AboutPage() {
   ];
 
   const achievements = [
-    { icon: Users, number: '5,000+', label: 'Students Graduated' },
-    { icon: Award, number: '95%', label: 'Job Placement Rate' },
-    { icon: Code, number: '50+', label: 'Industry Partners' },
-    { icon: Target, number: '4.9/5', label: 'Student Satisfaction' },
+    { icon: Users, number: '5,000+', label: 'دانش‌آموخته' },
+    { icon: Award, number: '95%', label: 'اشتغال پس از دوره' },
+    { icon: Code, number: '1+', label: 'شریک صنعتی' },
+    { icon: Target, number: '4.9/5', label: 'رضایت دانشجویان' },
   ];
 
   const milestones = [
-    { year: '2018', event: 'CodeInstitute Founded', description: 'Started with a vision to democratize programming education' },
-    { year: '2019', event: 'First 100 Graduates', description: 'Celebrated our first milestone with 95% job placement rate' },
-    { year: '2020', event: 'Online Platform Launch', description: 'Expanded to online learning during the global pandemic' },
-    { year: '2021', event: 'Corporate Partnerships', description: 'Partnered with leading tech companies for direct hiring' },
+    { year: '1397', event: 'شکل‌گیری خیام', description: 'لازمات ایجاد آموزشگاه خیام آغاز می‌شود' },
+    { year: '1399', event: 'تدریس 8 دوره اول', description: 'آموزش دادن 8 دوره به طور رسمی و متناوب' },
+    { year: '2020', event: 'تشکیل تیم طراحی سایت', description: 'Expanded to online learning during the global pandemic' },
+    { year: '2021', event: 'شروع نخستین پروژه بزرگ طراحی سایت', description: 'Partnered with leading tech companies for direct hiring' },
     { year: '2022', event: '1,000+ Graduates', description: 'Reached four-figure graduate milestone with expanded curriculum' },
     { year: '2023', event: 'International Expansion', description: 'Opened offices in 5 countries to serve global students' },
   ];
@@ -71,11 +71,11 @@ export function AboutPage() {
       <section className="bg-gradient-to-r from-indigo-500 to-purple-600 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            About CodeInstitute
+            درباره آموزشگاه
           </h1>
           <p className="text-xl text-indigo-100 max-w-3xl mx-auto">
-            We're on a mission to empower the next generation of programmers through 
-            world-class education, mentorship, and career support.
+            ما در مأموریتی هستیم تا نسل بعدی برنامه‌نویسان را از طریق آموزش‌های 
+            سطح‌بالا، مربیگری تخصصی و پشتیبانی شغلی توانمند کنیم.
           </p>
         </div>
       </section>
@@ -85,23 +85,17 @@ export function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
+              <h2 className="text-3xl font-bold mb-6 text-green-700">چشم‌انداز ما</h2>
               <p className="text-lg text-gray-600 mb-6">
-                To bridge the gap between traditional education and industry needs by providing 
-                practical, hands-on programming education that prepares students for successful 
-                careers in technology.
-              </p>
-              <p className="text-lg text-gray-600">
-                We believe that quality programming education should be accessible to everyone, 
-                regardless of their background or previous experience.
+                ما در پی آن هستیم که به معتبرترین و پیشروترین پلتفرم آموزش عملی برنامه‌نویسی در جهان تبدیل شویم؛ بستری که با پرورش جامعه‌ای جهانی از توسعه‌دهندگان توانمند، نوآوری را گسترش داده و به ایجاد تغییرات مثبت در جهان از طریق فناوری یاری رساند.
               </p>
             </div>
             <div className="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+              <h3 className="text-2xl font-bold mb-4 text-green-700">مأموریت ما</h3>
               <p className="text-gray-700">
-                To become the world's leading platform for practical programming education, 
-                creating a global community of skilled developers who drive innovation and 
-                positive change through technology.
+                رسالت ما پر کردن شکاف میان آموزش‌های سنتی و نیازهای واقعی صنعت است. ما با ارائه آموزش‌های کاربردی و مبتنی بر تجربه عملی، دانشجویان را برای ورود به بازار کار و ساختن آینده‌ای موفق در دنیای فناوری توانمند می‌سازیم.
+
+ما باور داریم آموزش باکیفیت برنامه‌نویسی باید در دسترس همه باشد؛ فارغ از پیشینه، شرایط یا تجربه قبلی هر فرد.
               </p>
             </div>
           </div>
@@ -112,9 +106,9 @@ export function AboutPage() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Values</h2>
+            <h2 className="text-3xl font-bold mb-4 text-indigo-500">ارزش‌های ما</h2>
             <p className="text-xl text-gray-600">
-              The principles that guide everything we do
+              اصولی که راهنمای تمامی فعالیت‌های ما هستند
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -139,9 +133,9 @@ export function AboutPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Impact</h2>
+            <h2 className="text-3xl font-bold mb-4">تأثیر ما</h2>
             <p className="text-xl text-gray-600">
-              Numbers that reflect our commitment to student success
+              اعدادی که نشان‌دهنده تعهدمان به موفقیت دانشجویان هستند
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -182,7 +176,7 @@ export function AboutPage() {
                             {milestone.year}
                           </Badge>
                         </div>
-                        <CardTitle className="text-lg">{milestone.event}</CardTitle>
+                        <CardTitle className="text-lg text-indigo-600">{milestone.event}</CardTitle>
                       </CardHeader>
                       <CardContent>
                         <p className="text-gray-600">{milestone.description}</p>
@@ -202,9 +196,9 @@ export function AboutPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
+            <h2 className="text-3xl font-bold mb-4 text-indigo-500">با تیم ما آشنا شوید</h2>
             <p className="text-xl text-gray-600">
-              Passionate educators and industry experts dedicated to your success
+              هنرجویان موفقی که هم‌اکنون درحال انجام پروژه هستند
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">

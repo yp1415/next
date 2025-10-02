@@ -227,7 +227,7 @@ export default function Dashboard() {
     <div className="flex flex-col">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="px-3 py-1 rounded-md bg-indigo-600 text-white shadow-sm"
+        className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-600 text-white shadow-sm"
       >
         افزودن دوره
       </button>

@@ -64,7 +64,7 @@ export function CourseCard({
   return (
     <div
       className={`h-35 m-3 w-97/100 flex items-center justify-between p-4 rounded-lg text-black shadow-md border ${
-        isActive ? "border-blue-500 bg-blue-50" : "border-gray-200 bg-white"
+        isActive ? "" : ""
       }`}
     >
       {/* Profile & Title */}
