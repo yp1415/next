@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './components/HomePage';
+import { BlogPage } from './components/blogsPage';
 import { CoursesPage } from './components/CoursesPage';
 import { AboutPage } from './components/AboutPage';
 import { ContactPage } from './components/ContactPage';
@@ -17,6 +18,8 @@ export default function App() {
         return <HomePage onPageChange={setCurrentPage} />;
       case 'courses':
         return <CoursesPage />;
+      case 'blogs':
+        return <BlogPage />;
       case 'about':
         return <AboutPage />;
       case 'contact':
@@ -123,7 +126,7 @@ export default function App() {
                 <h4 className="font-bold text-lg mb-2">Stay Updated</h4>
                 <p className="text-gray-300 text-sm">Get the latest course updates and career tips delivered to your inbox.</p>
               </div>
-              <div className="flex space-x-3">
+              {/* <div className="flex space-x-3">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -132,7 +135,7 @@ export default function App() {
                 <button className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg font-semibold hover:from-emerald-600 hover:to-teal-700 transition-all duration-300">
                   Subscribe
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

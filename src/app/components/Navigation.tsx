@@ -16,6 +16,7 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const navItems = [
     { id: 'home', label: 'خانه' },
     { id: 'courses', label: 'دوره‌ها' },
+    { id: 'blogs', label: 'بلاگ‌ها' },
     { id: 'about', label: 'درباره ما' },
     { id: 'contact', label: 'ارتباط با ما' },
   ];
