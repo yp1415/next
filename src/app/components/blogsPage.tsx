@@ -64,7 +64,7 @@ export function BlogPage() {
       {featuredPost && (
         <div className="mb-16 flex flex-col md:flex-row gap-8 items-center">
           {/* Featured Image */}
-          <div className="w-full md:w-1/2 relative aspect-[16/10] rounded-2xl overflow-hidden">
+          {/* <div className="w-full md:w-1/2 relative aspect-[16/10] rounded-2xl overflow-hidden">
             <Image
               src={featuredPost.image}
               alt={featuredPost.title}
@@ -73,7 +73,7 @@ export function BlogPage() {
               sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
-          </div>
+          </div> */}
 
           {/* Featured Info */}
           <div className="md:w-1/2">
@@ -101,25 +101,25 @@ export function BlogPage() {
             className="rounded-2xl overflow-hidden bg-white/80 shadow-md hover:shadow-lg transition border border-transparent hover:border-cyan-400/40"
           >
             <div className="relative w-full aspect-[16/10]">
-              <Image
+              {/* <Image
                 src={post.image}
                 alt={post.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
+              /> */}
             </div>
             <div className="p-5">
-              <span className="text-xs font-semibold text-indigo-500 uppercase">
+              <span className="text-s text-indigo-400">
                 {post.tag}
               </span>
-              <h4 className="text-lg font-bold mt-2">{post.title}</h4>
-              <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+              <h4 className="text-lg text-teal-600 font-bold mt-2">{post.title}</h4>
+              <p className="text-sm text-gray-600 mt-2 my-3 line-clamp-3">
                 {post.about}
               </p>
-              <button className="mt-4 text-sm font-semibold text-cyan-600 hover:text-indigo-600 transition">
-                بیشتر بخوانید →
-              </button>
+              <button className="mt-6 px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold hover:opacity-90 transition">
+              بیشتر بخوانید
+            </button>
             </div>
           </div>
         ))}

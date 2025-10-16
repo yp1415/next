@@ -1,6 +1,7 @@
 "use client";
 
 import { getCourse } from "@/lib/model/course";
+import { getBlogs } from "@/lib/model/blog";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
@@ -16,7 +17,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { h1, p } from "framer-motion/client";
 
 const lineData = [
   { week: "wk1", a: 40, b: 24 },
@@ -36,16 +36,17 @@ const barData = [
 
 export default function Dashboard() {
 
-  const [activeTab,setActiveTab] = useState<"students" | "courses" | "dashboard">("dashboard");
-  const [Courses,setCourses] = useState<any[]>([]);
-  const [loading,setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"students" | "courses" | "dashboard" | "blogs">("dashboard");
+  const [Courses, setCourses] = useState<any[]>([]);
+  const [blogs, setBlogs] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchCourses() {
       const result = await getCourse();
       if (result.success) {
-        setCourses(result.data.courses) 
+        setCourses(result.data.courses)
       } else {
         // console.error(result.errors);
       }
@@ -53,9 +54,21 @@ export default function Dashboard() {
     }
 
     fetchCourses();
-  },[])
+  }, [])
 
+  useEffect(() => {
+    async function fetchBlogs() {
+      const result = await getBlogs();
+      if (result.success) {
+        setBlogs(result.data.blogs)
+      } else {
+        // console.error(result.errors);
+      }
+      setLoading(false);
+    }
 
+    fetchBlogs();
+  }, [])
 
   if (loading) return <p>Loading...</p>;
 
@@ -67,196 +80,243 @@ export default function Dashboard() {
           <KhayyamLogo></KhayyamLogo>
         </div>
         <nav className="space-y-2">
-          <button onClick={() => setActiveTab("dashboard")} className={`{ w-full block px-3 py-2 rounded-lg bg-blue-600} ${
-              activeTab==="dashboard"
+          <button onClick={() => setActiveTab("dashboard")} className={`{ w-full block px-3 py-2 rounded-lg bg-blue-600} ${activeTab === "dashboard"
               ? "bg-blue-500"
               : "bg-blue-600"
-          }`}
+            }`}
           >
-            dashboard
+            داشبورد
           </button>
-          <button onClick={() => setActiveTab("courses")} className={`w-full block px-3 py-2 rounded-lg hover:bg-blue-500 ${
-            activeTab==="courses"
-            ? "bg-blue-500"
-            : "bg-blue-600"
+          <button onClick={() => setActiveTab("courses")} className={`w-full block px-3 py-2 rounded-lg hover:bg-blue-500 ${activeTab === "courses"
+              ? "bg-blue-500"
+              : "bg-blue-600"
             }`}>
             دوره‌ها
           </button>
           <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500">
             دانش‌آموزان
           </button>
-            
-          
-          <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500" value={'Reports'}/>
-            
-          
+          <button onClick={() => setActiveTab("blogs")} className={`{ w-full block px-3 py-2 rounded-lg bg-blue-600} ${activeTab === "blogs"
+              ? "bg-blue-500"
+              : "bg-blue-600"
+            }`}
+          >
+            بلاگ‌ها
+          </button>
+
+          <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500" value={'Reports'} />
+
+
         </nav>
       </aside>
 
       {/* Main */}
-      {activeTab==="dashboard" && (
-      <main className="flex-1 p-6 space-y-6">
-        {/* Topbar */}
-        <header className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Finance</h1>
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="px-3 py-2 rounded-lg border"
-            />
-            <div className="w-10 h-10 rounded-full bg-gray-300"></div>
-          </div>
-        </header>
+      {activeTab === "dashboard" && (
+        <main className="flex-1 p-6 space-y-6">
+          {/* Topbar */}
+          <header className="flex justify-between items-center">
+            <h1 className="text-2xl font-bold">Finance</h1>
+            <div className="flex items-center space-x-4">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="px-3 py-2 rounded-lg border"
+              />
+              <div className="w-10 h-10 rounded-full bg-gray-300"></div>
+            </div>
+          </header>
 
-        {/* Stat Cards */}
-        <div className="grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <p className="text-gray-500">Total Students</p>
-            <h2 className="text-2xl font-bold">932</h2>
-            <span className="text-green-500 text-sm">+10% from last month</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <p className="text-gray-500">Paid Students</p>
-            <h2 className="text-2xl font-bold">754</h2>
-            <span className="text-red-500 text-sm">-5% from last month</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <p className="text-gray-500">School Income</p>
-            <h2 className="text-2xl font-bold">$123,456</h2>
-            <span className="text-green-500 text-sm">+8% this month</span>
-          </div>
-        </div>
-
-        {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <h3 className="text-lg font-bold mb-4">Balance Analytics</h3>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={lineData}>
-                  <XAxis dataKey="week" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="a" stroke="#6366f1" />
-                  <Line type="monotone" dataKey="b" stroke="#f43f5e" />
-                </LineChart>
-              </ResponsiveContainer>
+          {/* Stat Cards */}
+          <div className="grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <p className="text-gray-500">Total Students</p>
+              <h2 className="text-2xl font-bold">932</h2>
+              <span className="text-green-500 text-sm">+10% from last month</span>
+            </div>
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <p className="text-gray-500">Paid Students</p>
+              <h2 className="text-2xl font-bold">754</h2>
+              <span className="text-red-500 text-sm">-5% from last month</span>
+            </div>
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <p className="text-gray-500">School Income</p>
+              <h2 className="text-2xl font-bold">$123,456</h2>
+              <span className="text-green-500 text-sm">+8% this month</span>
             </div>
           </div>
 
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <h3 className="text-lg font-bold mb-4">Finance Map</h3>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={barData}>
-                  <XAxis dataKey="week" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="income" fill="#6366f1" />
-                  <Bar dataKey="expense" fill="#f43f5e" />
-                </BarChart>
-              </ResponsiveContainer>
+          {/* Charts */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <h3 className="text-lg font-bold mb-4">Balance Analytics</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={lineData}>
+                    <XAxis dataKey="week" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="a" stroke="#6366f1" />
+                    <Line type="monotone" dataKey="b" stroke="#f43f5e" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <h3 className="text-lg font-bold mb-4">Finance Map</h3>
+              <div className="h-64">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={barData}>
+                    <XAxis dataKey="week" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="income" fill="#6366f1" />
+                    <Bar dataKey="expense" fill="#f43f5e" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Tables */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <h3 className="text-lg font-bold mb-4">Unpaid Student Tuition</h3>
-            <table className="w-full text-sm">
-              <thead className="text-left text-gray-500">
-                <tr>
-                  <th>Name</th>
-                  <th>Class</th>
-                  <th>Fee</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Jackson Nico</td>
-                  <td>WIC</td>
-                  <td>$2,000</td>
-                  <td><span className="text-red-500">Unpaid</span></td>
-                </tr>
-                <tr>
-                  <td>Sarah Kim</td>
-                  <td>BIO</td>
-                  <td>$1,500</td>
-                  <td><span className="text-red-500">Unpaid</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          {/* Tables */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <h3 className="text-lg font-bold mb-4">Unpaid Student Tuition</h3>
+              <table className="w-full text-sm">
+                <thead className="text-left text-gray-500">
+                  <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Fee</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Jackson Nico</td>
+                    <td>WIC</td>
+                    <td>$2,000</td>
+                    <td><span className="text-red-500">Unpaid</span></td>
+                  </tr>
+                  <tr>
+                    <td>Sarah Kim</td>
+                    <td>BIO</td>
+                    <td>$1,500</td>
+                    <td><span className="text-red-500">Unpaid</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-          <div className="bg-white p-4 rounded-2xl shadow">
-            <h3 className="text-lg font-bold mb-4">School Expenses</h3>
-            <table className="w-full text-sm">
-              <thead className="text-left text-gray-500">
-                <tr>
-                  <th>ID</th>
-                  <th>Item</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#245</td>
-                  <td>Books</td>
-                  <td>$760</td>
-                  <td><span className="text-green-500">Completed</span></td>
-                </tr>
-                <tr>
-                  <td>#246</td>
-                  <td>Transport</td>
-                  <td>$980</td>
-                  <td><span className="text-green-500">Completed</span></td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="bg-white p-4 rounded-2xl shadow">
+              <h3 className="text-lg font-bold mb-4">School Expenses</h3>
+              <table className="w-full text-sm">
+                <thead className="text-left text-gray-500">
+                  <tr>
+                    <th>ID</th>
+                    <th>Item</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#245</td>
+                    <td>Books</td>
+                    <td>$760</td>
+                    <td><span className="text-green-500">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td>#246</td>
+                    <td>Transport</td>
+                    <td>$980</td>
+                    <td><span className="text-green-500">Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
       )}
 
-{activeTab === "courses" && (
-  <div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
-    <div className="flex flex-col">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-600 text-white shadow-sm"
-      >
-        افزودن دوره
-      </button>
+      {activeTab === "courses" && (
+        <div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
+          <div className="flex flex-col">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-500 text-white shadow-sm"
+            >
+              افزودن دوره
+            </button>
+          </div>
+          {Courses.map((course) => (
+            <CourseCard
+              key={course.id}
+              id={course.id}
+              title={course.title}
+              price={`${course.price} تومان`}
+              time={course.time}
+              days={course.days}
+              image={course.image}
+              isActive={course.is_active}
+              startDate={course.start_of_class}
+              studentCount={course.students_count}
+              onDelete={(id) => {
+                setCourses((prev) => prev.filter((c) => c.id !== id));
+              }}
+            />
+          ))}
+          <AddCourseModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onAdd={(newCourse) => setCourses((prev) => [...prev, newCourse])}
+          />
+        </div>
+      )}
+
+    {activeTab === "blogs" && (
+      <div className="flex flex-col m-2">
+        <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-500 text-white shadow-sm"
+        >
+              افزودن بلاگ
+        </button>
+      <div className="grid p-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
+        {blogs.map((blog) => (
+          <div
+            key={blog.id}
+            className="rounded-2xl overflow-hidden bg-white/80 shadow-md hover:shadow-lg transition border border-transparent hover:border-cyan-400/40"
+          >
+            <div className="relative w-full aspect-[16/10]">
+              {/* <Image
+                src={blog.image}
+                alt={blog.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              /> */}
+            </div>
+            <div className="p-5">
+              <span className="text-s text-indigo-400">
+                {blog.tag}
+              </span>
+              <h4 className="text-lg text-teal-600 font-bold mt-2">{blog.title}</h4>
+              <p className="text-sm text-gray-600 mt-2 my-3 line-clamp-3">
+                {blog.about}
+              </p>
+              <button className="mt-6 px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-semibold hover:opacity-90 transition">
+              بیشتر بخوانید
+            </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      </div>
+    )}
+
+
     </div>
-  {Courses.map((course, id) => (
-    <CourseCard
-      key={course.id}
-      id={course.id}
-      title={course.title} 
-      price={`${course.price} تومان`}
-      time={course.time}
-      days={course.days}
-      profileImg="/path-to-lang-icon.png"
-      isActive={course.is_active}
-      startDate={course.start_of_class}
-      studentCount={course.students_count}
-      onDelete={(id) => {
-      setCourses((prev) => prev.filter((c) => c.id !== id));
-      }}
-    />
-  ))}
-  <AddCourseModal
-    isOpen={isModalOpen}
-    onClose={() => setIsModalOpen(false)}
-    onAdd={(newCourse) => setCourses((prev) => [...prev, newCourse])}
-  />
-</div>
-)}
-  </div>
   );
 }
-``
+
