@@ -4,7 +4,7 @@ import { addCourse } from "@/lib/model/course";
 type AddCourseModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onAdd: (course: any) => void; // you can replace `any` with your Course type
+  onAdd: (course: any) => void;
 };
 
 export function AddCourseModal({ isOpen, onClose, onAdd }: AddCourseModalProps) {

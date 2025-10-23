@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
 import { AddCourseModal } from "@/app/components/ui/addCourseModal";
+import { AddBlogModal } from "@/app/components/ui/addBlogModal";
 import React from "react";
 import {
   LineChart,
@@ -40,7 +41,8 @@ export default function Dashboard() {
   const [Courses, setCourses] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [courseModalOpen, setCourseModalOpen] = useState(false);
+  const [blogModalOpen, setBlogModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchCourses() {
@@ -243,7 +245,7 @@ export default function Dashboard() {
         <div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
           <div className="flex flex-col">
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setCourseModalOpen(true)}
               className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-500 text-white shadow-sm"
             >
               افزودن دوره
@@ -267,8 +269,8 @@ export default function Dashboard() {
             />
           ))}
           <AddCourseModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            isOpen={courseModalOpen}
+            onClose={() => setCourseModalOpen(false)}
             onAdd={(newCourse) => setCourses((prev) => [...prev, newCourse])}
           />
         </div>
@@ -277,7 +279,7 @@ export default function Dashboard() {
     {activeTab === "blogs" && (
       <div className="flex flex-col m-2">
         <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setBlogModalOpen(true)}
               className="px-3 w-50 mr-3 h-15 py-1 rounded-md bg-indigo-500 text-white shadow-sm"
         >
               افزودن بلاگ
@@ -311,6 +313,12 @@ export default function Dashboard() {
             </div>
           </div>
         ))}
+      <AddBlogModal
+      isOpen={blogModalOpen}
+      onClose={() => setCourseModalOpen(false)}
+      onAdd={(newBlog) => setBlogs((prev) => [...prev, newBlog])}  
+      />
+
       </div>
       </div>
     )}
