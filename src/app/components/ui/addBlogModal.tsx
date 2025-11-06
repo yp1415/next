@@ -26,11 +26,11 @@ export function AddBlogModal({ isOpen, onClose, onAdd }: AddBlogModalProps) {
   }
 
   try {
-    const data = await addBlog(formData); // 👈 pass FormData instead of object
+    const data = await addBlog(formData);
     console.log(data);
     
     console.log("Blog created:", data);
-    onAdd(data); // call parent callback
+    onAdd(data);
     onClose();
   } catch (err) {
     console.error("Form Error:", err);

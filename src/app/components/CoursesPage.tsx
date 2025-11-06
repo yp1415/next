@@ -6,6 +6,7 @@ import { Clock, Users, Star, CheckCircle, Code, Database, Smartphone, Filter, Se
 import { motion } from 'framer-motion';
 import { getCourse } from '@/lib/model/course';
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 export function CoursesPage() {
 
@@ -229,9 +230,9 @@ export function CoursesPage() {
                         <span className="text-3xl font-bold text-indigo-600">{course.price} ت</span>
                       </div>
                       <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                        <BookOpen className="h-4 w-4 mr-2" />
-                        درباره این زبان
-                        <ArrowRight className="h-4 w-4 ml-2" />
+                          <BookOpen className="h-4 w-4 mr-2" />
+                          درباره این زبان
+                          <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </div>
                   </CardContent>

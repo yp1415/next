@@ -24,25 +24,25 @@ export function AboutPage() {
 
   const team = [
     {
-      name: 'Dr. Sarah Johnson',
+      name: 'امیرحسین نیازمند',
+      role: 'Head of Curriculum',
+      bio: 'اقا امیر بهترین برنامه نویس جهان',
+      image: '/api/placeholder/150/150',
+    },
+    {
+      name: 'علی تمدن',
       role: 'Founder & CEO',
       bio: 'Former Google engineer with 15+ years of experience in software development and education.',
       image: '/api/placeholder/150/150',
     },
     {
-      name: 'Prof. Michael Chen',
-      role: 'Head of Curriculum',
-      bio: 'Computer Science PhD with expertise in AI/ML and 10+ years of teaching experience.',
-      image: '/api/placeholder/150/150',
-    },
-    {
-      name: 'Alex Rodriguez',
+      name: 'یسنا پهلوانی',
       role: 'Director of Student Success',
       bio: 'Education specialist focused on student outcomes and career placement success.',
       image: '/api/placeholder/150/150',
     },
     {
-      name: 'Emily Davis',
+      name: 'جواد رحمتیان',
       role: 'Lead Instructor',
       bio: 'Full-stack developer and former startup CTO with passion for teaching modern web technologies.',
       image: '/api/placeholder/150/150',
@@ -206,7 +206,7 @@ export function AboutPage() {
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <div className="w-24 h-24 mx-auto bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full mb-4"></div>
-                  <CardTitle className="text-lg">{member.name}</CardTitle>
+                  <CardTitle className="text-lg text-indigo-500">{member.name}</CardTitle>
                   <Badge variant="secondary" className="mx-auto">{member.role}</Badge>
                 </CardHeader>
                 <CardContent>
