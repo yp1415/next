@@ -2,11 +2,13 @@
 
 import { getCourse } from "@/lib/model/course";
 import { getBlogs } from "@/lib/model/blog";
+import { getStudents } from "@/lib/model/student";
 import { useState, useEffect } from "react";
 import { CourseCard } from "@/app/components/courseCard"
 import { KhayyamLogo } from "@/app/components/KhayyamLogo";
 import { AddCourseModal } from "@/app/components/ui/addCourseModal";
 import { AddBlogModal } from "@/app/components/ui/addBlogModal";
+import { DataTable } from "@/app/components/ui/studentCard";
 import React from "react";
 import {
   LineChart,
@@ -39,6 +41,7 @@ export default function Dashboard() {
 
   const [activeTab, setActiveTab] = useState<"students" | "courses" | "dashboard" | "blogs">("dashboard");
   const [Courses, setCourses] = useState<any[]>([]);
+  const [students, setStudents] = useState<any[]>([]);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [courseModalOpen, setCourseModalOpen] = useState(false);
@@ -72,6 +75,22 @@ export default function Dashboard() {
     fetchBlogs();
   }, [])
 
+  useEffect(() => {
+  async function fetchStudents() {
+    const result = await getStudents();
+    console.log("students api result:", result);
+
+    if (result.success) {
+      // ✅ کلید درست طبق خروجی API
+      setStudents(result.data?.users ?? []);
+    } else {
+      setStudents([]);
+    }
+  }
+
+  fetchStudents();
+}, []);
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -95,7 +114,7 @@ export default function Dashboard() {
             }`}>
             دوره‌ها
           </button>
-          <button className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500">
+          <button onClick={() => setActiveTab("students")} className="w-full block px-3 py-2 rounded-lg hover:bg-blue-500">
             دانش‌آموزان
           </button>
           <button onClick={() => setActiveTab("blogs")} className={`{ w-full block px-3 py-2 rounded-lg bg-blue-600} ${activeTab === "blogs"
@@ -275,6 +294,16 @@ export default function Dashboard() {
           />
         </div>
       )}
+    {activeTab === "students" && (
+<div className="flex-1 flex-col w-full m-4 cols-1 md:cols-2 gap-2">
+  <DataTable
+    data={students}
+    onDelete={(id) =>
+      setStudents((prev) => prev.filter((s) => s.id !== id))
+    }
+  />
+</div>
+)}
 
     {activeTab === "blogs" && (
       <div className="flex flex-col m-2">

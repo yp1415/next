@@ -140,30 +140,6 @@ export function CoursesPage() {
         </div>
       </section>
 
-      {/* Categories Filter */}
-      <section className="py-8 bg-gradient-to-r from-gray-100 to-indigo-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category, index) => (
-              <Button
-                key={index}
-                variant={category.active ? "default" : "outline"}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  category.active 
-                    ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg" 
-                    : "bg-white border-2 border-gray-200 text-gray-700 hover:border-emerald-300 hover:text-emerald-600"
-                }`}
-              >
-                {category.name}
-                <Badge variant="secondary" className="ml-2 bg-gray-100 text-gray-600">
-                  {category.count}
-                </Badge>
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Enhanced Courses Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,9 +205,9 @@ export function CoursesPage() {
                       <div>
                         <span className="text-3xl font-bold text-indigo-600">{course.price} ت</span>
                       </div>
-                      <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <Button onClick={() => onPageChange("dashboard")} className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                           <BookOpen className="h-4 w-4 mr-2" />
-                          درباره این زبان
+                          اطلاعات بیشتر
                           <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </div>
