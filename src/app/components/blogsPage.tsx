@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { getBlogs } from "@/lib/model/blog";
 
 interface BlogPost {

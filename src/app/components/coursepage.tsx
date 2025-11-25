@@ -1,0 +1,2 @@
+import { CourseCard } from "./courseCard";
+

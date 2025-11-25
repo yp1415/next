@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-
 import { getCourse } from "@/lib/model/course";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { KhayyamLogo } from "./KhayyamLogo";
+import Link from "next/link";
 import {
   Users,
   BookOpen,
@@ -31,11 +31,11 @@ interface HomePageProps {
 
 export function HomePage({ onPageChange }: HomePageProps) {
 
-  const [coursesData, setCoursesData] = useState<any[]>([]); // rename variable
+  const [coursesData, setCoursesData] = useState<any[]>([]);
 
   useEffect(() => {
     async function fetchCourses() {
-      const result = await getCourse(); // getCourse برمی‌گردونه { success, data, errors }
+      const result = await getCourse(); 
       if (result.success && result.data) {
         setCoursesData(result.data.courses?? []);
         console.log(result.data.courses);
@@ -544,6 +544,8 @@ export function HomePage({ onPageChange }: HomePageProps) {
           </div>
 
           <div className="text-center mt-12">
+            
+            <Link href={"/courses"}>
             <Button
               variant="outline"
               size="lg"
@@ -553,6 +555,7 @@ export function HomePage({ onPageChange }: HomePageProps) {
               <BookOpen className="mr-2 h-5 w-5" />
               مشاهده تمام دوره‌ها
             </Button>
+            </Link>
           </div>
         </div>
       </section>
