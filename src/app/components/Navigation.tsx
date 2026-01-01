@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { Button } from './ui/button';
 import { Menu, X, BookOpen, Play } from 'lucide-react';
 import { KhayyamLogo } from './KhayyamLogo';
+import Link from 'next/link';
+import { usePathname } from "next/navigation";
+import { label } from 'framer-motion/client';
 
 interface NavigationProps {
   currentPage: string;
@@ -12,14 +15,16 @@ interface NavigationProps {
 
 export function Navigation({ currentPage, onPageChange }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const pathname = usePathname();
 
-  const navItems = [
-    { id: 'home', label: 'خانه' },
-    { id: 'courses', label: 'دوره‌ها' },
-    { id: 'blogs', label: 'بلاگ‌ها' },
-    { id: 'about', label: 'درباره ما' },
-    { id: 'contact', label: 'ارتباط با ما' },
-  ];
+const navLinks = [
+  { href: "/", label: "خانه" },
+  { href: "/courses", label: "دوره‌ها" },
+  { href: "/blogs", label:"بلاگ‌ها" },
+  { href: "/about", label: "درباره ما" },
+  { href: "/contact", label:"ارتباط با ما" }
+];
+
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-indigo-100">
@@ -30,22 +35,25 @@ export function Navigation({ currentPage, onPageChange }: NavigationProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => onPageChange(item.id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-300 relative ${
-                  currentPage === item.id
+            {navLinks.map(link => {
+              const isActive = pathname === link.href;
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-4 py-2 rounded-lg transition-all duration-300 relative ${
+                  isActive
                     ? 'text-indigo-600 bg-gradient-to-r from-indigo-50 to-purple-50 shadow-sm'
                     : 'text-gray-700 hover:text-indigo-600 hover:bg-gradient-to-r hover:from-gray-50 hover:to-indigo-50'
                 }`}
-              >
-                {item.label}
-                {currentPage === item.id && (
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-indigo-600 rounded-full"></div>
-                )}
-              </button>
-            ))}
+
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
             <div className="ml-6 flex items-center space-x-3">
               <Button 
                 variant="outline"

@@ -545,11 +545,10 @@ export function HomePage({ onPageChange }: HomePageProps) {
 
           <div className="text-center mt-12">
             
-            <Link href={"/courses"}>
+            <Link href="/courses">
             <Button
               variant="outline"
               size="lg"
-              onClick={() => onPageChange("courses")}
               className="border-2 border-indigo-500 text-indigo-600 hover:bg-indigo-500 hover:text-white px-8 py-3 text-lg transition-all duration-300"
             >
               <BookOpen className="mr-2 h-5 w-5" />
